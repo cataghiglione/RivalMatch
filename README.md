@@ -1,2 +1,2 @@
 # RivalMatch
-#Integrantes: Constanza Lasarte, Fernando Vassolo y Catalina Ghiglione
+Integrantes: Constanza Lasarte, Fernando Vassolo y Catalina Ghiglione
