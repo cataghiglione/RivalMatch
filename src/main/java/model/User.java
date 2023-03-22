@@ -28,10 +28,18 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    public User() { }
+    public User() {
+    }
 
-    public static UserBuilder create(String email) {
-        return new UserBuilder(email);
+    private User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public static User create(String email, String password, String firstName, String lastName) {
+        return new User(firstName, lastName, email, password);
     }
 
     public String getFirstName() {
@@ -75,12 +83,6 @@ public class User {
         return password;
     }
 
-    private User(UserBuilder builder) {
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
-        this.password = builder.password;
-        this.email = builder.email;
-    }
 
     public static User fromJson(String json) {
         final Gson gson = new Gson();
@@ -92,36 +94,5 @@ public class User {
         return gson.toJson(this);
     }
 
-    public static class UserBuilder {
-        private final String email;
-        private String firstName;
-        private String lastName;
-        private String password;
-
-        public UserBuilder(String email) {
-            this.email = email;
-        }
-
-        public UserBuilder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserBuilder firstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public UserBuilder lastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-
-        public User build() {
-            return new User(this);
-        }
-
-    }
 
 }

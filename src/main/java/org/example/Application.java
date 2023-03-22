@@ -56,20 +56,12 @@ public class Application {
         tx.begin();
         if (users.listAll().isEmpty()) {
             final User kate =
-                    User.create("catuchi22@river.com")
-                            .firstName("Catuchi")
-                            .lastName("Ghi").
-                            build();
+                    User.create("catuchi22@river.com", "91218","Catuchi","Ghi");
             final User coke =
-                    User.create("cocaL@depo.com")
-                            .firstName("Coke")
-                            .lastName("lasa")
-                            .build();
+                    User.create("cocaL@depo.com","1234","Coke","Lasa");
+
             final User fercho =
-                    User.create("ferpalacios@remix.com")
-                            .firstName("Fercho")
-                            .lastName("Palacios")
-                            .build();
+                    User.create("ferpalacios@remix.com","4321","Fercho","Palacios");
 
             users.persist(kate);
             users.persist(coke);
