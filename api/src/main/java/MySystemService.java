@@ -17,7 +17,7 @@ public class MySystemService {
 
     private void startWebServer() {
         staticFiles.location("public");
-        port(4321);
+        port(4326);
         final MySystem system = MySystem.create("my-system-db");
         routes.create(system);
     }
