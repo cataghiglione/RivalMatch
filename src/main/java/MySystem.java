@@ -25,7 +25,7 @@ public class MySystem {
     public Optional<User> registerUser(RegistrationUserForm form) {
         return runInTransaction(datasource -> {
             final Users users = datasource.users();
-            return users.exists(form.getEmail()) ? Optional.empty() : Optional.of(users.createUser(form));
+            return users.exists(form.getEmail(),form.getUsername()) ? Optional.empty() : Optional.of(users.createUser(form));
         });
     }
 

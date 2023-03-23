@@ -57,7 +57,7 @@ public class Routes {
                     },
                     () -> {
                         res.status(409);
-                        res.body("user already exists");
+                        res.body("username or email already exists");
                     }
             );
 

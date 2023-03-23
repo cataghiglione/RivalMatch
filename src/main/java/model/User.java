@@ -1,6 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
+import org.checkerframework.checker.units.qual.C;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -21,6 +22,13 @@ public class User {
 
     @Column(name = "LAST_NAME")
     private String lastName;
+
+    @Column(name="USERNAME")
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
 
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;

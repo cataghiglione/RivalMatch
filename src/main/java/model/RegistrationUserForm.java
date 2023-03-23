@@ -11,14 +11,17 @@ public class RegistrationUserForm {
 
     private final String lastName;
 
+    private final String username;
 
 
 
-    public RegistrationUserForm(String email, String password, String firstName, String lastName) {
+
+    public RegistrationUserForm(String email, String password, String firstName, String lastName, String username) {
         this.email = email;
         this.password = password;
         this.firstName=firstName;
         this.lastName=lastName;
+        this.username = username;
     }
 
     public static RegistrationUserForm createFromJson(String body) {
@@ -39,5 +42,8 @@ public class RegistrationUserForm {
     }
     public String getFirstName() {
         return firstName;
+    }
+    public String getUsername() {
+        return username;
     }
 }
