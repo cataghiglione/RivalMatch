@@ -1,24 +1,12 @@
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
-import json.JsonParser;
 
 import model.RegistrationUserForm;
-import model.User;
 import repository.Users;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 import spark.Spark;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static json.JsonParser.toJson;
 import static spark.Spark.*;
 
 public class Routes {

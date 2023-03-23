@@ -1,7 +1,6 @@
 package model;
 
 import com.google.gson.Gson;
-import org.checkerframework.checker.units.qual.C;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
