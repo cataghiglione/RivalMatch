@@ -1,6 +1,7 @@
 import model.RegistrationUserForm;
 import model.User;
-import repository.Users;
+import repository.UserRepository;
+import systems.MySystemRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,23 +10,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class MySystem {
+public class RivalMatchSystem {
 
     private final EntityManagerFactory factory;
 
-    private MySystem(EntityManagerFactory factory) {
+    private RivalMatchSystem(EntityManagerFactory factory) {
         this.factory = factory;
     }
 
-    public static MySystem create(String persistenceUnitName) {
+    public static RivalMatchSystem create(String persistenceUnitName) {
         final EntityManagerFactory factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-        return new MySystem(factory);
+        return new RivalMatchSystem(factory);
     }
 
     public Optional<User> registerUser(RegistrationUserForm form) {
         return runInTransaction(datasource -> {
-            final Users users = datasource.users();
-            return users.exists(form.getEmail(),form.getUsername()) ? Optional.empty() : Optional.of(users.createUser(form));
+            final UserRepository userRepository = datasource.users();
+            return userRepository.exists(form.getEmail(),form.getUsername()) ? Optional.empty() : Optional.of(userRepository.createUser(form));
         });
     }
 
@@ -43,9 +44,9 @@ public class MySystem {
     }
 
 
-    private <E> E runInTransaction(Function<MySystemRepository, E> closure) {
+    private <E> E runInTransaction(Function<Repository, E> closure) {
         final EntityManager entityManager = factory.createEntityManager();
-        final MySystemRepository ds = MySystemRepository.create(entityManager);
+        final Repository ds = Repository.create(entityManager);
 
         try {
             entityManager.getTransaction().begin();

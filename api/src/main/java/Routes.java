@@ -1,10 +1,11 @@
-import com.google.gson.Gson;
 
+import com.google.gson.Gson;
 import model.RegistrationUserForm;
-import repository.Users;
+import repository.UserRepository;
 import spark.Spark;
-import javax.persistence.EntityManagerFactory;
+
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import static spark.Spark.*;
@@ -14,12 +15,12 @@ public class Routes {
     public static final String USERS_ROUTE = "/users";
 
 
-    private MySystem system;
+    private RivalMatchSystem system;
     private static final Gson gson = new Gson();
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rmatch");
 
 
-    public void create(MySystem system) {
+    public void create(RivalMatchSystem system) {
         this.system = system;
         routes();
     }
@@ -55,7 +56,7 @@ public class Routes {
             resp.type("application/json");
             resp.status(200);
             final EntityManager entityManager = entityManagerFactory.createEntityManager();
-            final Users users = new Users(entityManager);
+            final UserRepository userRepository = new UserRepository(entityManager);
 
 //            try {
 //
@@ -63,7 +64,7 @@ public class Routes {
 //                resp.status(409);
 //                resp.body("ee");
 //            }
-            return gson.toJson(users.listAll());
+            return gson.toJson(userRepository.listAll());
         });
 
     }

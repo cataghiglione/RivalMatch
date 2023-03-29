@@ -1,9 +1,10 @@
+
 import spark.Spark;
 
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
-public class MySystemService {
+public class RivalMatchService {
 
     private final Routes routes = new Routes();
 
@@ -18,7 +19,7 @@ public class MySystemService {
     private void startWebServer() {
         staticFiles.location("public");
         port(4326);
-        final MySystem system = MySystem.create("my-system-db");
+        final RivalMatchSystem system = RivalMatchSystem.create("rmatch");
         routes.create(system);
     }
 

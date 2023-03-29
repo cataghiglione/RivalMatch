@@ -8,11 +8,11 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class Users {
+public class UserRepository {
 
     private final EntityManager entityManager;
 
-    public Users(EntityManager entityManager) {
+    public UserRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
     public boolean exists(String email,String username) {

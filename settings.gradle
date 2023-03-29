@@ -1,1 +1,4 @@
 rootProject.name = 'RivalMatch'
+
+include "api"
+include "ui"

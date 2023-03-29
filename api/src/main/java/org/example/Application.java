@@ -2,7 +2,7 @@ package org.example;
 
 import com.google.gson.Gson;
 import model.User;
-import repository.Users;
+import repository.UserRepository;
 import spark.Spark;
 
 import javax.persistence.EntityManager;
@@ -26,7 +26,7 @@ public class Application {
             resp.type("application/json");
             resp.status(200);
             final EntityManager entityManager = entityManagerFactory.createEntityManager();
-            final Users users = new Users(entityManager);
+            final UserRepository userRepository = new UserRepository(entityManager);
 
 //            try {
 //
@@ -34,7 +34,7 @@ public class Application {
 //                resp.status(409);
 //                resp.body("ee");
 //            }
-            return gson.toJson(users.listAll());
+            return gson.toJson(userRepository.listAll());
         });
 
 
@@ -42,11 +42,11 @@ public class Application {
 
     private static void storedBasicUser(EntityManagerFactory entityManagerFactory) {
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        final Users users = new Users(entityManager);
+        final UserRepository userRepository = new UserRepository(entityManager);
 
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        if (users.listAll().isEmpty()) {
+        if (userRepository.listAll().isEmpty()) {
             final User kate =
                     User.create("catuchi22@river.com", "91218","Catuchi","Ghi");
             final User coke =
@@ -55,9 +55,9 @@ public class Application {
             final User fercho =
                     User.create("ferpalacios@remix.com","4321","Fercho","Palacios");
 
-            users.persist(kate);
-            users.persist(coke);
-            users.persist(fercho);
+            userRepository.persist(kate);
+            userRepository.persist(coke);
+            userRepository.persist(fercho);
         }
         tx.commit();
         entityManager.close();
